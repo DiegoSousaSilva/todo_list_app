@@ -22,13 +22,14 @@ O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluind
 
 ## Estrutura Atual do Projeto
 
-```text
+```
 lib
 │  ├─ app
 │  │  ├─ app_module.dart
 │  │  ├─ app_widget.dart
 │  │  ├─ core
 │  │  │  └─ database
+│  │  │     ├─ sqlite_adm_connection.dart
 │  │  │     ├─ migrations
 │  │  │     │  ├─ migration.dart
 │  │  │     │  ├─ migration_v1.dart
@@ -42,7 +43,8 @@ lib
 │  │  ├─ repositories
 │  │  └─ services
 │  └─ main.dart
-```
+
+``` 
 
 ## Organização das Pastas
 
@@ -107,3 +109,4 @@ Projeto criado como laboratório de aprendizado para evolução em Flutter e des
 ## Autor
 
 Diego Sousa
+
