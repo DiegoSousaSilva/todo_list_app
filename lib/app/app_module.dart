@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list_app/app/app_widget.dart';
+import 'package:todo_list_app/app/core/database/sqlite_connection_factory.dart';
 
 class AppModule extends StatelessWidget {
   const AppModule({super.key});
@@ -8,7 +9,9 @@ class AppModule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [Provider(create: (_) => null)],
+      providers: [
+        Provider(create: (_) => SqliteConnectionFactory(), lazy: false),
+      ],
       child: AppWidget(),
     );
   }

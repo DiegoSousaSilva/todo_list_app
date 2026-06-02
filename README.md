@@ -23,27 +23,25 @@ O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluind
 ## Estrutura Atual do Projeto
 
 ```text
-lib/
-│
-├── main.dart
-│
-└── app/
-    ├── app_module.dart
-    ├── app_widget.dart
-    │
-    ├── core/
-    │   └── database/
-    │       └── sqlite_connection_factory.dart
-    │
-    ├── models/
-    │
-    ├── repositories/
-    │
-    ├── services/
-    │
-    └── modules/
-        └── splash/
-            └── splash_page.dart
+lib
+│  ├─ app
+│  │  ├─ app_module.dart
+│  │  ├─ app_widget.dart
+│  │  ├─ core
+│  │  │  └─ database
+│  │  │     ├─ migrations
+│  │  │     │  ├─ migration.dart
+│  │  │     │  ├─ migration_v1.dart
+│  │  │     │  └─ migration_v2.dart
+│  │  │     ├─ sqlite_connection_factory.dart
+│  │  │     └─ sqlite_migration_factory.dart
+│  │  ├─ models
+│  │  ├─ modules
+│  │  │  └─ splash
+│  │  │     └─ splash_page.dart
+│  │  ├─ repositories
+│  │  └─ services
+│  └─ main.dart
 ```
 
 ## Organização das Pastas
