@@ -1,17 +1,109 @@
-# todo_list_app
+# Todo List App
 
-A new Flutter project.
+Aplicativo de gerenciamento de tarefas desenvolvido em Flutter com foco em aprendizado, organização de código e aplicação de boas práticas de desenvolvimento mobile.
 
-## Getting Started
+## Objetivo
 
-This project is a starting point for a Flutter application.
+O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluindo:
 
-A few resources to get you started if this is your first Flutter project:
+* Estruturação de projetos
+* Navegação entre telas
+* Gerenciamento de estado
+* Persistência local de dados
+* Organização em camadas
+* Versionamento com Git
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Tecnologias
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* Flutter
+* Dart
+* Provider
+* SQLite (sqflite)
+
+## Estrutura Atual do Projeto
+
+```text
+lib/
+│
+├── main.dart
+│
+└── app/
+    ├── app_module.dart
+    ├── app_widget.dart
+    │
+    ├── core/
+    │
+    ├── models/
+    │
+    ├── repositories/
+    │
+    ├── services/
+    │
+    └── modules/
+        └── splash/
+            └── splash_page.dart
+```
+
+## Organização das Pastas
+
+### core/
+
+Responsável por componentes compartilhados, constantes, utilitários e recursos globais da aplicação.
+
+### models/
+
+Contém as entidades e modelos de dados utilizados pela aplicação.
+
+### repositories/
+
+Responsável pela camada de acesso aos dados, abstraindo a origem das informações.
+
+### services/
+
+Contém serviços da aplicação, como banco de dados local, APIs e outras integrações.
+
+### modules/
+
+Organização baseada em funcionalidades da aplicação.
+
+Atualmente:
+
+* Splash Module
+
+Novos módulos serão adicionados conforme o crescimento do projeto.
+
+## Funcionalidades Planejadas
+
+* [ ] Cadastro de tarefas
+* [ ] Edição de tarefas
+* [ ] Exclusão de tarefas
+* [ ] Marcação de tarefas concluídas
+* [ ] Persistência local com SQLite
+* [ ] Gerenciamento de estado com Provider
+* [ ] Filtro de tarefas
+* [ ] Tema escuro
+* [ ] Estatísticas de produtividade
+
+## Como Executar
+
+Instalar dependências:
+
+```bash
+flutter pub get
+```
+
+Executar o projeto:
+
+```bash
+flutter run
+```
+
+## Status
+
+🚧 Em desenvolvimento.
+
+Projeto criado como laboratório de aprendizado para evolução em Flutter e desenvolvimento mobile.
+
+## Autor
+
+Diego Sousa
