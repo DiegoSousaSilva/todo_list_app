@@ -32,6 +32,8 @@ lib/
     ├── app_widget.dart
     │
     ├── core/
+    │   └── database/
+    │       └── sqlite_connection_factory.dart
     │
     ├── models/
     │
