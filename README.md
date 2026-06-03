@@ -65,7 +65,14 @@ O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluind
 │  │  │  └─ splash
 │  │  │     └─ splash_page.dart
 │  │  ├─ repositories
+│  │  │  └─ user
+│  │  │     ├─ user_repository.dart
+│  │  │     └─ user_repository_impl.dart
 │  │  └─ services
+│  │     └─ user
+│  │        ├─ user_service.dart
+│  │        └─ user_service_impl.dart
+│  ├─ firebase_options.dart
 │  └─ main.dart
 
 ``` 
@@ -131,20 +138,22 @@ Contém serviços utilizados pela aplicação, como autenticação, banco de dad
 
 ## Funcionalidades
 
+
 ### Concluído
 
 * [x] Estrutura modular da aplicação
 * [x] Configuração do SQLite
 * [x] Sistema de Migrations
 * [x] Gerenciamento do ciclo de vida do banco
+* [x] Configuração do Firebase
 * [x] Tema global da aplicação
 * [x] Splash Screen
 * [x] Tela de Login
+* [x] Tela de Cadastro
 * [x] Campo de formulário reutilizável
 * [x] Componentes visuais compartilhados
-* [x] Tela de Cadastro
-
-
+* [x] Estrutura de Repository Pattern
+* [x] Estrutura de Service Layer
 
 ### Próximas Implementações
 
@@ -157,6 +166,33 @@ Contém serviços utilizados pela aplicação, como autenticação, banco de dad
 * [ ] Filtro de tarefas
 * [ ] Tema escuro
 * [ ] Estatísticas de produtividade
+
+
+## Arquitetura Aplicada
+
+O projeto busca seguir princípios de separação de responsabilidades e código limpo.
+
+### Repository Pattern
+
+Responsável por abstrair o acesso aos dados e serviços externos.
+
+Exemplo:
+
+* UserRepository
+* UserRepositoryImpl
+
+### Service Layer
+
+Responsável por concentrar regras de negócio da aplicação.
+
+Exemplo:
+
+* UserService
+* UserServiceImpl
+
+### Modularização
+
+A aplicação é organizada por funcionalidades (Feature First), facilitando manutenção, escalabilidade e reaproveitamento de código.
 
 
 ## Como Executar
