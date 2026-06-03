@@ -30,7 +30,7 @@ O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluind
 ├─ assets
 │  └─ images
 │     └─ logo.png
-├─ lib
+├─  lib
 │  ├─ app
 │  │  ├─ app_module.dart
 │  │  ├─ app_widget.dart
@@ -50,6 +50,7 @@ O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluind
 │  │  │  │  ├─ theme_extensions.dart
 │  │  │  │  └─ todo_list_ui_config.dart
 │  │  │  └─ widget
+│  │  │     ├─ todo_list_field.dart
 │  │  │     └─ todo_list_logo.dart
 │  │  ├─ models
 │  │  ├─ modules
@@ -111,9 +112,13 @@ Contém serviços utilizados pela aplicação, como autenticação, banco de dad
 * [x] Estrutura modular da aplicação
 * [x] Configuração do SQLite
 * [x] Sistema de Migrations
+* [x] Gerenciamento do ciclo de vida do banco
 * [x] Tema global da aplicação
-* [x] Tela de Login
 * [x] Splash Screen
+* [x] Tela de Login
+* [x] Campo de formulário reutilizável
+* [x] Componentes visuais compartilhados
+
 
 ### Próximas Implementações
 
@@ -151,6 +156,5 @@ Projeto criado como laboratório de aprendizado para evolução em Flutter e des
 ## Autor
 
 Diego Sousa
-
 
 

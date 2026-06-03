@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sign_in_button/sign_in_button.dart';
-import 'package:provider/provider.dart';
+import 'package:todo_list_app/app/core/widget/todo_list_field.dart';
 import 'package:todo_list_app/app/core/widget/todo_list_logo.dart';
-import 'package:todo_list_app/app/modules/auth/login/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -32,9 +31,9 @@ class LoginPage extends StatelessWidget {
                       child: Form(
                         child: Column(
                           children: [
-                            TextFormField(),
+                            TodoListField(label: "Email"),
                             SizedBox(height: 20),
-                            TextFormField(),
+                            TodoListField(label: "Senha", obscureText: true),
                             SizedBox(height: 10),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,16 +44,16 @@ class LoginPage extends StatelessWidget {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {},
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(10),
                                     child: Text(
                                       "Login",
                                       style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
                                     ),
                                   ),
                                 ),
