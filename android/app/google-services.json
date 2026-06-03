@@ -37,6 +37,13 @@
             {
               "client_id": "687096179426-1kr24r6qolhkjku3r7kb7fjjjuosddg9.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "687096179426-mmjan0mvsughilehl44vtfihnbo9gb45.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.diego.todoListApp"
+              }
             }
           ]
         }

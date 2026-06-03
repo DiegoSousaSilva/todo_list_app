@@ -39,6 +39,8 @@ dependencies:
   path: ^1.9.1
   google_fonts: ^8.1.0
   sign_in_button: ^5.0.0
+  firebase_core: ^4.10.0
+  firebase_auth: ^6.5.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
