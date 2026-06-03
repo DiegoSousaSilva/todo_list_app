@@ -30,7 +30,7 @@ O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluind
 ├─ assets
 │  └─ images
 │     └─ logo.png
-├─  lib
+├─ lib
 │  ├─ app
 │  │  ├─ app_module.dart
 │  │  ├─ app_widget.dart
@@ -56,9 +56,12 @@ O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluind
 │  │  ├─ modules
 │  │  │  ├─ auth
 │  │  │  │  ├─ auth_module.dart
-│  │  │  │  └─ login
-│  │  │  │     ├─ login_controller.dart
-│  │  │  │     └─ login_page.dart
+│  │  │  │  ├─ login
+│  │  │  │  │  ├─ login_controller.dart
+│  │  │  │  │  └─ login_page.dart
+│  │  │  │  └─ register
+│  │  │  │     ├─ register_controller.dart
+│  │  │  │     └─ register_page.dart
 │  │  │  └─ splash
 │  │  │     └─ splash_page.dart
 │  │  ├─ repositories
@@ -83,13 +86,34 @@ Contém recursos compartilhados por toda a aplicação:
 
 Organização baseada em funcionalidades (Feature First).
 
-Cada módulo possui suas próprias telas, controladores e regras de negócio.
+Cada módulo concentra suas telas, controladores e responsabilidades relacionadas a uma funcionalidade específica da aplicação.
 
-Atualmente:
+#### Auth Module
 
-* Splash Module
-* Auth Module
-* Todo List Module
+Responsável pelo fluxo de autenticação do usuário.
+
+Atualmente contém:
+
+* Login Page
+* Register Page
+* Controllers de Login e Cadastro
+
+#### Splash Module
+
+Tela inicial responsável pelo carregamento da aplicação e inicialização dos recursos necessários.
+
+#### Todo List Module
+
+Módulo principal da aplicação.
+
+Será responsável por:
+
+* Cadastro de tarefas
+* Edição de tarefas
+* Exclusão de tarefas
+* Controle de tarefas concluídas
+* Filtros e produtividade
+
 
 ### models/
 
@@ -118,6 +142,8 @@ Contém serviços utilizados pela aplicação, como autenticação, banco de dad
 * [x] Tela de Login
 * [x] Campo de formulário reutilizável
 * [x] Componentes visuais compartilhados
+* [x] Tela de Cadastro
+
 
 
 ### Próximas Implementações
@@ -156,5 +182,4 @@ Projeto criado como laboratório de aprendizado para evolução em Flutter e des
 ## Autor
 
 Diego Sousa
-
 
