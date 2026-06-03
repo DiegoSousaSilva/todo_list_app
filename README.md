@@ -19,11 +19,18 @@ O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluind
 * Dart
 * Provider
 * SQLite (sqflite)
+* Google Fonts
+* Sign In Button
+* Path
+
 
 ## Estrutura Atual do Projeto
 
 ```
-lib
+├─ assets
+│  └─ images
+│     └─ logo.png
+├─ lib
 │  ├─ app
 │  │  ├─ app_module.dart
 │  │  ├─ app_widget.dart
@@ -36,9 +43,14 @@ lib
 │  │  │  │  ├─ sqlite_adm_connection.dart
 │  │  │  │  ├─ sqlite_connection_factory.dart
 │  │  │  │  └─ sqlite_migration_factory.dart
-│  │  │  └─ modules
-│  │  │     ├─ todo_list_module.dart
-│  │  │     └─ todo_list_page.dart
+│  │  │  ├─ modules
+│  │  │  │  ├─ todo_list_module.dart
+│  │  │  │  └─ todo_list_page.dart
+│  │  │  ├─ ui
+│  │  │  │  ├─ theme_extensions.dart
+│  │  │  │  └─ todo_list_ui_config.dart
+│  │  │  └─ widget
+│  │  │     └─ todo_list_logo.dart
 │  │  ├─ models
 │  │  ├─ modules
 │  │  │  ├─ auth
@@ -58,41 +70,63 @@ lib
 
 ### core/
 
-Responsável por componentes compartilhados, constantes, utilitários e recursos globais da aplicação.
+Contém recursos compartilhados por toda a aplicação:
 
-### models/
-
-Contém as entidades e modelos de dados utilizados pela aplicação.
-
-### repositories/
-
-Responsável pela camada de acesso aos dados, abstraindo a origem das informações.
-
-### services/
-
-Contém serviços da aplicação, como banco de dados local, APIs e outras integrações.
+* Configuração do banco de dados SQLite
+* Migrations
+* Temas e estilização
+* Widgets reutilizáveis
+* Configurações globais
 
 ### modules/
 
-Organização baseada em funcionalidades da aplicação.
+Organização baseada em funcionalidades (Feature First).
+
+Cada módulo possui suas próprias telas, controladores e regras de negócio.
 
 Atualmente:
 
 * Splash Module
+* Auth Module
+* Todo List Module
 
-Novos módulos serão adicionados conforme o crescimento do projeto.
+### models/
 
-## Funcionalidades Planejadas
+Contém as entidades e modelos de dados da aplicação.
 
+### repositories/
+
+Responsável pelo acesso e persistência dos dados.
+
+### services/
+
+Contém serviços utilizados pela aplicação, como autenticação, banco de dados e integrações externas.
+
+
+
+## Funcionalidades
+
+### Concluído
+
+* [x] Estrutura modular da aplicação
+* [x] Configuração do SQLite
+* [x] Sistema de Migrations
+* [x] Tema global da aplicação
+* [x] Tela de Login
+* [x] Splash Screen
+
+### Próximas Implementações
+
+* [ ] Autenticação
 * [ ] Cadastro de tarefas
 * [ ] Edição de tarefas
 * [ ] Exclusão de tarefas
 * [ ] Marcação de tarefas concluídas
-* [ ] Persistência local com SQLite
-* [ ] Gerenciamento de estado com Provider
+* [ ] Persistência local de tarefas
 * [ ] Filtro de tarefas
 * [ ] Tema escuro
 * [ ] Estatísticas de produtividade
+
 
 ## Como Executar
 
@@ -117,5 +151,6 @@ Projeto criado como laboratório de aprendizado para evolução em Flutter e des
 ## Autor
 
 Diego Sousa
+
 
 
