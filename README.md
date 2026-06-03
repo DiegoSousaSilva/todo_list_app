@@ -28,16 +28,24 @@ lib
 │  │  ├─ app_module.dart
 │  │  ├─ app_widget.dart
 │  │  ├─ core
-│  │  │  └─ database
-│  │  │     ├─ sqlite_adm_connection.dart
-│  │  │     ├─ migrations
-│  │  │     │  ├─ migration.dart
-│  │  │     │  ├─ migration_v1.dart
-│  │  │     │  └─ migration_v2.dart
-│  │  │     ├─ sqlite_connection_factory.dart
-│  │  │     └─ sqlite_migration_factory.dart
+│  │  │  ├─ database
+│  │  │  │  ├─ migrations
+│  │  │  │  │  ├─ migration.dart
+│  │  │  │  │  ├─ migration_v1.dart
+│  │  │  │  │  └─ migration_v2.dart
+│  │  │  │  ├─ sqlite_adm_connection.dart
+│  │  │  │  ├─ sqlite_connection_factory.dart
+│  │  │  │  └─ sqlite_migration_factory.dart
+│  │  │  └─ modules
+│  │  │     ├─ todo_list_module.dart
+│  │  │     └─ todo_list_page.dart
 │  │  ├─ models
 │  │  ├─ modules
+│  │  │  ├─ auth
+│  │  │  │  ├─ auth_module.dart
+│  │  │  │  └─ login
+│  │  │  │     ├─ login_controller.dart
+│  │  │  │     └─ login_page.dart
 │  │  │  └─ splash
 │  │  │     └─ splash_page.dart
 │  │  ├─ repositories
@@ -109,4 +117,5 @@ Projeto criado como laboratório de aprendizado para evolução em Flutter e des
 ## Autor
 
 Diego Sousa
+
 
