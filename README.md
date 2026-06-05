@@ -15,6 +15,8 @@ O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluind
 
 ## Tecnologias
 
+## Tecnologias
+
 * Flutter
 * Dart
 * Firebase Authentication
@@ -22,6 +24,8 @@ O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluind
 * Provider
 * Google Fonts
 * Sign In Button
+* Validatorless
+* Flutter Overlay Loader
 * Path
 
 
@@ -47,7 +51,11 @@ O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluind
 │  │  │  ├─ modules
 │  │  │  │  ├─ todo_list_module.dart
 │  │  │  │  └─ todo_list_page.dart
+│  │  │  ├─ notifier
+│  │  │  │  ├─ default_change_notifier.dart
+│  │  │  │  └─ default_listener_notifier.dart
 │  │  │  ├─ ui
+│  │  │  │  ├─ messages.dart
 │  │  │  │  ├─ theme_extensions.dart
 │  │  │  │  └─ todo_list_ui_config.dart
 │  │  │  ├─ validators
@@ -162,6 +170,10 @@ Contém serviços utilizados pela aplicação, como autenticação, banco de dad
 * [x] Cadastro de usuários com Firebase Authentication
 * [x] Validação de formulários
 * [x] Tratamento de exceções de autenticação
+* [x] Sistema global de Loading
+* [x] Sistema global de Feedback de Erros
+* [x] Sistema global de Feedback de Sucesso
+* [x] Notifier Pattern para gerenciamento de estados
 
 ### Próximas Implementações
 
@@ -225,6 +237,23 @@ Módulos atuais:
 * Auth
 * Splash
 * Todo List
+  
+
+### State Management
+
+O projeto utiliza ChangeNotifier para gerenciamento de estados das telas.
+
+Foi criada uma estrutura base reutilizável contendo:
+
+* DefaultChangeNotifier
+* DefaultListenerNotifier
+
+Permitindo tratamento padronizado de:
+
+* Loading
+* Sucesso
+* Erros
+* Feedback visual ao usuário
 
 
 ## Como Executar
