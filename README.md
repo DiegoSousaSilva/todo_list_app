@@ -17,8 +17,9 @@ O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluind
 
 * Flutter
 * Dart
-* Provider
+* Firebase Authentication
 * SQLite (sqflite)
+* Provider
 * Google Fonts
 * Sign In Button
 * Path
@@ -49,9 +50,13 @@ O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluind
 │  │  │  ├─ ui
 │  │  │  │  ├─ theme_extensions.dart
 │  │  │  │  └─ todo_list_ui_config.dart
+│  │  │  ├─ validators
+│  │  │  │  └─ validators.dart
 │  │  │  └─ widget
 │  │  │     ├─ todo_list_field.dart
 │  │  │     └─ todo_list_logo.dart
+│  │  ├─ exceptions
+│  │  │  └─ auth_exception.dart
 │  │  ├─ models
 │  │  ├─ modules
 │  │  │  ├─ auth
@@ -154,6 +159,9 @@ Contém serviços utilizados pela aplicação, como autenticação, banco de dad
 * [x] Componentes visuais compartilhados
 * [x] Estrutura de Repository Pattern
 * [x] Estrutura de Service Layer
+* [x] Cadastro de usuários com Firebase Authentication
+* [x] Validação de formulários
+* [x] Tratamento de exceções de autenticação
 
 ### Próximas Implementações
 
@@ -170,29 +178,53 @@ Contém serviços utilizados pela aplicação, como autenticação, banco de dad
 
 ## Arquitetura Aplicada
 
-O projeto busca seguir princípios de separação de responsabilidades e código limpo.
+O projeto segue uma arquitetura modular baseada em separação de responsabilidades.
 
-### Repository Pattern
+### Presentation Layer
 
-Responsável por abstrair o acesso aos dados e serviços externos.
+Responsável pela interface do usuário.
 
-Exemplo:
+Exemplos:
 
-* UserRepository
-* UserRepositoryImpl
+* LoginPage
+* RegisterPage
+* SplashPage
+* Controllers
 
 ### Service Layer
 
-Responsável por concentrar regras de negócio da aplicação.
+Contém as regras de negócio da aplicação.
 
-Exemplo:
+Exemplos:
 
 * UserService
 * UserServiceImpl
 
-### Modularização
+### Repository Layer
 
-A aplicação é organizada por funcionalidades (Feature First), facilitando manutenção, escalabilidade e reaproveitamento de código.
+Responsável pela comunicação com fontes de dados externas.
+
+Exemplos:
+
+* UserRepository
+* UserRepositoryImpl
+
+### Data Sources
+
+Atualmente:
+
+* Firebase Authentication
+* SQLite
+
+### Modularização (Feature First)
+
+Cada funcionalidade da aplicação é organizada em módulos independentes.
+
+Módulos atuais:
+
+* Auth
+* Splash
+* Todo List
 
 
 ## Como Executar
@@ -211,9 +243,17 @@ flutter run
 
 ## Status
 
-🚧 Em desenvolvimento.
+🚧 Em desenvolvimento
 
-Projeto criado como laboratório de aprendizado para evolução em Flutter e desenvolvimento mobile.
+Atualmente o projeto já possui:
+
+- Estrutura modular
+- Banco SQLite configurado
+- Firebase integrado
+- Cadastro de usuários funcional
+- Camadas Repository e Service implementadas
+
+Próxima etapa: conclusão do fluxo de autenticação e desenvolvimento do módulo de tarefas.
 
 ## Autor
 

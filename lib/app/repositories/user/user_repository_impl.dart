@@ -1,11 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:todo_list_app/app/exceptions/auth_exception.dart';
 import 'package:todo_list_app/app/repositories/user/user_repository.dart';
-
-class AuthException implements Exception {
-  final String message;
-  AuthException({required this.message});
-}
 
 class UserRepositoryImpl implements UserRepository {
   final FirebaseAuth _firebaseAuth;
