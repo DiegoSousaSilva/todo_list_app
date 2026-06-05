@@ -174,10 +174,11 @@ Contém serviços utilizados pela aplicação, como autenticação, banco de dad
 * [x] Sistema global de Feedback de Erros
 * [x] Sistema global de Feedback de Sucesso
 * [x] Notifier Pattern para gerenciamento de estados
+* [x] Autenticação com Email e Senha
 
 ### Próximas Implementações
 
-* [ ] Autenticação
+* [ ] Autenticação com Google
 * [ ] Cadastro de tarefas
 * [ ] Edição de tarefas
 * [ ] Exclusão de tarefas
@@ -191,6 +192,18 @@ Contém serviços utilizados pela aplicação, como autenticação, banco de dad
 ## Arquitetura Aplicada
 
 O projeto segue uma arquitetura modular baseada em separação de responsabilidades.
+
+### Fluxo de Autenticação
+
+LoginPage/RegisterPage
+        ↓
+Controllers
+        ↓
+Services
+        ↓
+Repositories
+        ↓
+Firebase Authentication
 
 ### Presentation Layer
 
@@ -276,10 +289,14 @@ flutter run
 
 Atualmente o projeto já possui:
 
-- Estrutura modular
-- Banco SQLite configurado
-- Firebase integrado
+- Estrutura modular baseada em Feature First
+- Banco SQLite configurado com sistema de migrations
+- Firebase Authentication integrado
 - Cadastro de usuários funcional
+- Login de usuários funcional
+- Validação de formulários
+- Tratamento centralizado de erros
+- Sistema global de loading e feedback visual
 - Camadas Repository e Service implementadas
 
 Próxima etapa: conclusão do fluxo de autenticação e desenvolvimento do módulo de tarefas.
