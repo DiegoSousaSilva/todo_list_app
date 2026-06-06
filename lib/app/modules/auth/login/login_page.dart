@@ -19,18 +19,41 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailEC = TextEditingController();
   final _passwordEC = TextEditingController();
+  final _emailFocus = FocusNode();
+
+  DefaultListenerNotifier? _listenerNotifier;
 
   @override
   void initState() {
     super.initState();
-    DefaultListenerNotifier(
+    _listenerNotifier = DefaultListenerNotifier(
       changeNotifier: context.read<LoginController>(),
-    ).listener(
+    );
+
+    _listenerNotifier!.listener(
       context: context,
+      everCallback: (notifier, listenerInstance) {
+        if (notifier is LoginController) {
+          if (notifier.hasInfo) {
+            Messages.of(context).showInfo(notifier.infoMessage!);
+            notifier.infoMessage = null;
+          }
+        }
+      },
       successCallback: (notifier, listenerInstance) {
+        //remover depois
         Messages.of(context).showInfo("Login Efetuado com sucesso!");
       },
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailEC.dispose();
+    _passwordEC.dispose();
+    _emailFocus.dispose();
+    _listenerNotifier?.dispose();
   }
 
   @override
@@ -62,6 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                             TodoListField(
                               label: "Email",
                               controller: _emailEC,
+                              focusNode: _emailFocus,
                               validator: Validatorless.multiple([
                                 Validatorless.required("Email é obrigatório!"),
                                 Validatorless.email("Email inválido!"),
@@ -85,7 +109,18 @@ class _LoginPageState extends State<LoginPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    if (_emailEC.text.isNotEmpty) {
+                                      context
+                                          .read<LoginController>()
+                                          .forgotPassword(_emailEC.text);
+                                    } else {
+                                      _emailFocus.requestFocus();
+                                      Messages.of(context).showError(
+                                        "Digite um e-mail para recuperar a senha",
+                                      );
+                                    }
+                                  },
                                   child: Text("Esqueceu sua senha?"),
                                 ),
                                 ElevatedButton(

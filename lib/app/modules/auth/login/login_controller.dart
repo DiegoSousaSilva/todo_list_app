@@ -4,13 +4,18 @@ import 'package:todo_list_app/app/services/user/user_service.dart';
 
 class LoginController extends DefaultChangeNotifier {
   final UserService _userService;
+  String? infoMessage;
 
-  LoginController({required userService}) : _userService = userService;
+  LoginController({required UserService userService})
+    : _userService = userService;
+
+  bool get hasInfo => infoMessage != null;
 
   Future<void> login(String email, String password) async {
     try {
       showLoadingAndResetState();
-      notifyListeners();
+      infoMessage = null;
+      //notifyListeners();
 
       final _user = await _userService.login(email, password);
 
@@ -23,7 +28,24 @@ class LoginController extends DefaultChangeNotifier {
       setError(e.message);
     } finally {
       hideLoading();
-      notifyListeners();
+      //notifyListeners();
+    }
+  }
+
+  Future<void> forgotPassword(String email) async {
+    try {
+      showLoadingAndResetState();
+      infoMessage = null;
+      //notifyListeners();
+      await _userService.forgotPassword(email);
+      infoMessage = "Reset de senha enviado para o e-mail";
+    } on AuthException catch (e) {
+      setError(e.message);
+    } catch (e) {
+      setError('Erro ao resetar senha!');
+    } finally {
+      hideLoading();
+      //notifyListeners();
     }
   }
 }

@@ -304,4 +304,3 @@ Próxima etapa: conclusão do fluxo de autenticação e desenvolvimento do módu
 ## Autor
 
 Diego Sousa
-

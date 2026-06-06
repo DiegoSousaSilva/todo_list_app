@@ -5,6 +5,7 @@ import 'package:todo_list_app/app/core/ui/messages.dart';
 
 class DefaultListenerNotifier {
   final DefaultChangeNotifier changeNotifier;
+  VoidCallback? _currentListener;
 
   DefaultListenerNotifier({required this.changeNotifier});
 
@@ -12,8 +13,15 @@ class DefaultListenerNotifier {
     required BuildContext context,
     required SuccessVoidCallback successCallback,
     ErrorVoidCallback? errorCallback,
+    EverCallback? everCallback,
   }) {
-    changeNotifier.addListener(() {
+    _removeCurrentListener();
+
+    _currentListener = () {
+      if (everCallback != null) {
+        everCallback(changeNotifier, this);
+      }
+
       if (changeNotifier.loading) {
         Loader.show(context);
       } else {
@@ -26,15 +34,22 @@ class DefaultListenerNotifier {
         }
         Messages.of(context).showError(changeNotifier.error ?? "Erro interno");
       } else if (changeNotifier.isSuccess) {
-        if (successCallback != null) {
-          successCallback(changeNotifier, this);
-        }
+        successCallback(changeNotifier, this);
       }
-    });
+    };
+
+    changeNotifier.addListener(_currentListener!);
+  }
+
+  void _removeCurrentListener() {
+    if (_currentListener != null) {
+      changeNotifier.removeListener(_currentListener!);
+      _currentListener = null;
+    }
   }
 
   void dispose() {
-    changeNotifier.removeListener(() {});
+    _removeCurrentListener();
   }
 }
 
@@ -45,6 +60,12 @@ typedef SuccessVoidCallback =
     );
 
 typedef ErrorVoidCallback =
+    void Function(
+      DefaultChangeNotifier notifier,
+      DefaultListenerNotifier listenerInstance,
+    );
+
+typedef EverCallback =
     void Function(
       DefaultChangeNotifier notifier,
       DefaultListenerNotifier listenerInstance,

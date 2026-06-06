@@ -64,4 +64,42 @@ class UserRepositoryImpl implements UserRepository {
       throw AuthException(message: e.message ?? "Erro ao realizar login!");
     }
   }
+
+  @override
+  Future<void> forgotPassword(String email) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e, s) {
+      print(e);
+      print(s);
+
+      if (e.code == 'no-such-provider' || e.code == 'invalid-provider') {
+        throw AuthException(
+          message:
+              "Esta conta foi criada com o Google. Faça login clicando no botão do Google",
+        );
+      }
+
+      switch (e.code) {
+        case 'user-not-found':
+          throw AuthException(
+            message: "Este e-mail não esta cadastrado no aplicativo.",
+          );
+        case 'invalid-email':
+          throw AuthException(
+            message: "O formato de e-mail digitado é inválido.",
+          );
+        case 'network-request-failed':
+          throw AuthException(
+            message: "Erro de conexão! Verifique sua internet.",
+          );
+        default:
+          throw AuthException(message: "Erro ao resetar senha: ${e.message}");
+      }
+    } catch (e) {
+      throw AuthException(
+        message: "Erro inesperado ao tentar recuperar senha!",
+      );
+    }
+  }
 }
