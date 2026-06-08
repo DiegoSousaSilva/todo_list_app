@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:todo_list_app/app/exceptions/auth_exception.dart';
 import 'package:todo_list_app/app/repositories/user/user_repository.dart';
 
@@ -100,6 +101,63 @@ class UserRepositoryImpl implements UserRepository {
       throw AuthException(
         message: "Erro inesperado ao tentar recuperar senha!",
       );
+    }
+  }
+
+  @override
+  Future<User?> googleLogin() async {
+    try {
+      final googleSignIn = GoogleSignIn.instance;
+
+      await googleSignIn.initialize();
+
+      final googleUser = await googleSignIn.authenticate();
+
+      if (googleUser == null) return null;
+
+      final googleAuth = await googleUser.authentication;
+
+      final firebaseCredential = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+        accessToken: null,
+      );
+
+      final userCredential = await _firebaseAuth.signInWithCredential(
+        firebaseCredential,
+      );
+
+      return userCredential.user;
+    } on FirebaseAuthException catch (e, s) {
+      print(e);
+      print(s);
+
+      if (e.code == 'account-exists-with-different-credential') {
+        throw AuthException(
+          message:
+              'Este e-mail já está associado a uma conta com senha. '
+              'Por favor, faça o login tradicional usando seu e-mail e senha.',
+        );
+      }
+
+      throw AuthException(
+        message: 'Erro ao autenticar com o Google: ${e.message}',
+      );
+    } catch (e) {
+      throw AuthException(
+        message: 'Erro inesperado ao tentar fazer login com o Google.',
+      );
+    }
+  }
+
+  @override
+  Future<void> googleLogOut() async {
+    try {
+      _firebaseAuth.signOut();
+      final googleSignIn = GoogleSignIn.instance;
+      await googleSignIn.initialize();
+      await googleSignIn.signOut();
+    } on AuthException catch (e) {
+      throw AuthException(message: "Erro ao tetar fazer logout do aplicativo!");
     }
   }
 }

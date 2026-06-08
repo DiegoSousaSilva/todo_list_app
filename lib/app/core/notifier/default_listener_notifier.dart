@@ -23,9 +23,15 @@ class DefaultListenerNotifier {
       }
 
       if (changeNotifier.loading) {
-        Loader.show(context);
+        try {
+          Loader.show(context);
+        } catch (_) {}
       } else {
-        Loader.hide();
+        try {
+          if (Loader.isShown) {
+            Loader.hide();
+          }
+        } catch (_) {}
       }
 
       if (changeNotifier.hasError) {

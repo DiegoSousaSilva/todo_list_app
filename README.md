@@ -13,13 +13,15 @@ O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluind
 * Organização em camadas
 * Versionamento com Git
 
-## Tecnologias
 
 ## Tecnologias
 
 * Flutter
 * Dart
 * Firebase Authentication
+  * Login com Email e Senha
+  * Recuperação de Senha
+  * Login com Google
 * SQLite (sqflite)
 * Provider
 * Google Fonts
@@ -110,13 +112,16 @@ Cada módulo concentra suas telas, controladores e responsabilidades relacionada
 
 #### Auth Module
 
-Responsável pelo fluxo de autenticação do usuário.
+Responsável pelo fluxo completo de autenticação do usuário.
 
-Atualmente contém:
+Funcionalidades implementadas:
 
-* Login Page
-* Register Page
-* Controllers de Login e Cadastro
+* Cadastro com Email e Senha
+* Login com Email e Senha
+* Recuperação de Senha
+* Login com Google
+* Tratamento de erros de autenticação
+* Feedback visual de carregamento e mensagens
 
 #### Splash Module
 
@@ -151,7 +156,6 @@ Contém serviços utilizados pela aplicação, como autenticação, banco de dad
 
 ## Funcionalidades
 
-
 ### Concluído
 
 * [x] Estrutura modular da aplicação
@@ -159,22 +163,20 @@ Contém serviços utilizados pela aplicação, como autenticação, banco de dad
 * [x] Sistema de Migrations
 * [x] Gerenciamento do ciclo de vida do banco
 * [x] Configuração do Firebase
-* [x] Tema global da aplicação
-* [x] Splash Screen
 * [x] Tela de Login
 * [x] Tela de Cadastro
-* [x] Campo de formulário reutilizável
-* [x] Componentes visuais compartilhados
-* [x] Estrutura de Repository Pattern
-* [x] Estrutura de Service Layer
 * [x] Cadastro de usuários com Firebase Authentication
+* [x] Login com Email e Senha
+* [x] Recuperação de Senha
+* [x] Login com Google
 * [x] Validação de formulários
 * [x] Tratamento de exceções de autenticação
 * [x] Sistema global de Loading
 * [x] Sistema global de Feedback de Erros
 * [x] Sistema global de Feedback de Sucesso
 * [x] Notifier Pattern para gerenciamento de estados
-* [x] Autenticação com Email e Senha
+* [x] Repository Pattern
+* [x] Service Layer
 
 ### Próximas Implementações
 
@@ -236,10 +238,16 @@ Exemplos:
 
 ### Data Sources
 
-Atualmente:
+Atualmente a aplicação utiliza:
 
 * Firebase Authentication
+  * Cadastro de usuários
+  * Login
+  * Recuperação de senha
+  * Login com Google
+
 * SQLite
+  * Persistência local de dados
 
 ### Modularização (Feature First)
 
@@ -287,19 +295,35 @@ flutter run
 
 🚧 Em desenvolvimento
 
-Atualmente o projeto já possui:
+### Funcionalidades já operacionais
 
-- Estrutura modular baseada em Feature First
-- Banco SQLite configurado com sistema de migrations
-- Firebase Authentication integrado
-- Cadastro de usuários funcional
-- Login de usuários funcional
-- Validação de formulários
-- Tratamento centralizado de erros
-- Sistema global de loading e feedback visual
-- Camadas Repository e Service implementadas
+✅ Cadastro de usuários
 
-Próxima etapa: conclusão do fluxo de autenticação e desenvolvimento do módulo de tarefas.
+✅ Login com Email e Senha
+
+✅ Login com Google
+
+✅ Recuperação de Senha
+
+✅ Firebase Authentication integrado
+
+✅ Arquitetura modular
+
+✅ Repository Pattern
+
+✅ Service Layer
+
+✅ Gerenciamento de estado com ChangeNotifier
+
+### Próximas etapas
+
+- Controle de sessão do usuário
+- Logout
+- Cadastro de tarefas
+- Persistência de tarefas
+- Filtros
+- Estatísticas de produtividade
+  
 
 ## Autor
 
