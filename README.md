@@ -31,67 +31,6 @@ O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluind
 * Path
 
 
-## Estrutura Atual do Projeto
-
-```
-├─ assets
-│  └─ images
-│     └─ logo.png
-├─ lib
-│  ├─ app
-│  │  ├─ app_module.dart
-│  │  ├─ app_widget.dart
-│  │  ├─ core
-│  │  │  ├─ database
-│  │  │  │  ├─ migrations
-│  │  │  │  │  ├─ migration.dart
-│  │  │  │  │  ├─ migration_v1.dart
-│  │  │  │  │  └─ migration_v2.dart
-│  │  │  │  ├─ sqlite_adm_connection.dart
-│  │  │  │  ├─ sqlite_connection_factory.dart
-│  │  │  │  └─ sqlite_migration_factory.dart
-│  │  │  ├─ modules
-│  │  │  │  ├─ todo_list_module.dart
-│  │  │  │  └─ todo_list_page.dart
-│  │  │  ├─ notifier
-│  │  │  │  ├─ default_change_notifier.dart
-│  │  │  │  └─ default_listener_notifier.dart
-│  │  │  ├─ ui
-│  │  │  │  ├─ messages.dart
-│  │  │  │  ├─ theme_extensions.dart
-│  │  │  │  └─ todo_list_ui_config.dart
-│  │  │  ├─ validators
-│  │  │  │  └─ validators.dart
-│  │  │  └─ widget
-│  │  │     ├─ todo_list_field.dart
-│  │  │     └─ todo_list_logo.dart
-│  │  ├─ exceptions
-│  │  │  └─ auth_exception.dart
-│  │  ├─ models
-│  │  ├─ modules
-│  │  │  ├─ auth
-│  │  │  │  ├─ auth_module.dart
-│  │  │  │  ├─ login
-│  │  │  │  │  ├─ login_controller.dart
-│  │  │  │  │  └─ login_page.dart
-│  │  │  │  └─ register
-│  │  │  │     ├─ register_controller.dart
-│  │  │  │     └─ register_page.dart
-│  │  │  └─ splash
-│  │  │     └─ splash_page.dart
-│  │  ├─ repositories
-│  │  │  └─ user
-│  │  │     ├─ user_repository.dart
-│  │  │     └─ user_repository_impl.dart
-│  │  └─ services
-│  │     └─ user
-│  │        ├─ user_service.dart
-│  │        └─ user_service_impl.dart
-│  ├─ firebase_options.dart
-│  └─ main.dart
-
-``` 
-
 ## Organização das Pastas
 
 ### core/
@@ -103,6 +42,7 @@ Contém recursos compartilhados por toda a aplicação:
 * Temas e estilização
 * Widgets reutilizáveis
 * Configurações globais
+
 
 ### modules/
 
@@ -177,14 +117,17 @@ Contém serviços utilizados pela aplicação, como autenticação, banco de dad
 * [x] Notifier Pattern para gerenciamento de estados
 * [x] Repository Pattern
 * [x] Service Layer
+* [x] Monitoramento global de autenticação
+* [x] Controle de sessão do usuário
+* [x] Redirecionamento automático após login
+* [x] Redirecionamento automático após logout
+* [x] Navegação global utilizando NavigatorKey
 
 ### Próximas Implementações
 
-* [ ] Autenticação com Google
 * [ ] Cadastro de tarefas
 * [ ] Edição de tarefas
 * [ ] Exclusão de tarefas
-* [ ] Marcação de tarefas concluídas
 * [ ] Persistência local de tarefas
 * [ ] Filtro de tarefas
 * [ ] Tema escuro
@@ -197,15 +140,31 @@ O projeto segue uma arquitetura modular baseada em separação de responsabilida
 
 ### Fluxo de Autenticação
 
-LoginPage/RegisterPage
-        ↓
-Controllers
-        ↓
-Services
-        ↓
-Repositories
-        ↓
-Firebase Authentication
+SplashPage
+      ↓
+AuthProvider
+      ↓
+FirebaseAuth
+      ↓
+Usuário autenticado?
+      ↓
+HomePage / LoginPage
+
+### Navegação Global
+
+A aplicação utiliza uma instância global de Navigator através do TodoListNavigator.
+
+Objetivos:
+
+* Permitir navegação fora da camada de UI
+* Facilitar redirecionamentos globais
+* Integrar o fluxo de autenticação com o Firebase
+
+Exemplo de uso:
+
+* Redirecionamento automático após login
+* Redirecionamento automático após logout
+* Controle de rotas baseado na sessão do usuário
 
 ### Presentation Layer
 
@@ -262,20 +221,38 @@ Módulos atuais:
 
 ### State Management
 
-O projeto utiliza ChangeNotifier para gerenciamento de estados das telas.
+O projeto utiliza ChangeNotifier e Provider para gerenciamento de estados globais e locais.
 
-Foi criada uma estrutura base reutilizável contendo:
+Estruturas implementadas:
 
 * DefaultChangeNotifier
 * DefaultListenerNotifier
+* AuthProvider
 
 Permitindo tratamento padronizado de:
 
 * Loading
 * Sucesso
 * Erros
+* Sessão do usuário
 * Feedback visual ao usuário
 
+### Gerenciamento de Sessão
+
+A aplicação utiliza um AuthProvider global responsável por monitorar as alterações de autenticação do Firebase.
+
+Recursos implementados:
+
+* Monitoramento do estado do usuário autenticado
+* Atualização automática da interface
+* Controle centralizado de logout
+* Redirecionamento automático entre Login e Home
+* Persistência de sessão do Firebase
+
+Eventos monitorados:
+
+* userChanges()
+* idTokenChanges()
 
 ## Como Executar
 
@@ -305,6 +282,12 @@ flutter run
 
 ✅ Recuperação de Senha
 
+✅ Persistência de sessão do Firebase
+
+✅ Controle global de autenticação
+
+✅ Redirecionamento automático Login/Home
+
 ✅ Firebase Authentication integrado
 
 ✅ Arquitetura modular
@@ -317,14 +300,81 @@ flutter run
 
 ### Próximas etapas
 
-- Controle de sessão do usuário
-- Logout
 - Cadastro de tarefas
 - Persistência de tarefas
 - Filtros
 - Estatísticas de produtividade
   
 
+## Estrutura Atual do Projeto
+
+```
+├─ assets
+│  └─ images
+│     └─ logo.png
+├─ ├─ lib
+│  ├─ app
+│  │  ├─ app_module.dart
+│  │  ├─ app_widget.dart
+│  │  ├─ core
+│  │  │  ├─ auth
+│  │  │  │  └─ auth_provider.dart
+│  │  │  ├─ database
+│  │  │  │  ├─ migrations
+│  │  │  │  │  ├─ migration.dart
+│  │  │  │  │  ├─ migration_v1.dart
+│  │  │  │  │  └─ migration_v2.dart
+│  │  │  │  ├─ sqlite_adm_connection.dart
+│  │  │  │  ├─ sqlite_connection_factory.dart
+│  │  │  │  └─ sqlite_migration_factory.dart
+│  │  │  ├─ modules
+│  │  │  │  ├─ todo_list_module.dart
+│  │  │  │  └─ todo_list_page.dart
+│  │  │  ├─ navigator
+│  │  │  │  └─ todo_list_navigator.dart
+│  │  │  ├─ notifier
+│  │  │  │  ├─ default_change_notifier.dart
+│  │  │  │  └─ default_listener_notifier.dart
+│  │  │  ├─ ui
+│  │  │  │  ├─ messages.dart
+│  │  │  │  ├─ theme_extensions.dart
+│  │  │  │  └─ todo_list_ui_config.dart
+│  │  │  ├─ validators
+│  │  │  │  └─ validators.dart
+│  │  │  └─ widget
+│  │  │     ├─ todo_list_field.dart
+│  │  │     └─ todo_list_logo.dart
+│  │  ├─ exceptions
+│  │  │  └─ auth_exception.dart
+│  │  ├─ models
+│  │  ├─ modules
+│  │  │  ├─ auth
+│  │  │  │  ├─ auth_module.dart
+│  │  │  │  ├─ login
+│  │  │  │  │  ├─ login_controller.dart
+│  │  │  │  │  └─ login_page.dart
+│  │  │  │  └─ register
+│  │  │  │     ├─ register_controller.dart
+│  │  │  │     └─ register_page.dart
+│  │  │  ├─ home
+│  │  │  │  ├─ home_module.dart
+│  │  │  │  └─ home_page.dart
+│  │  │  └─ splash
+│  │  │     └─ splash_page.dart
+│  │  ├─ repositories
+│  │  │  └─ user
+│  │  │     ├─ user_repository.dart
+│  │  │     └─ user_repository_impl.dart
+│  │  └─ services
+│  │     └─ user
+│  │        ├─ user_service.dart
+│  │        └─ user_service_impl.dart
+│  ├─ firebase_options.dart
+│  └─ main.dart
+
+``` 
+
 ## Autor
 
 Diego Sousa
+
