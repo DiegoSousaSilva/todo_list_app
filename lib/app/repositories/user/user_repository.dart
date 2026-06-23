@@ -6,4 +6,5 @@ abstract class UserRepository {
   Future<void> forgotPassword(String email);
   Future<User?> googleLogin();
   Future<void> logOut();
+  Future<void> updateDisplayName(String name);
 }

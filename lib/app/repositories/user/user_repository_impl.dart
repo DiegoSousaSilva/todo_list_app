@@ -108,8 +108,9 @@ class UserRepositoryImpl implements UserRepository {
   Future<User?> googleLogin() async {
     try {
       final googleSignIn = GoogleSignIn.instance;
-
-      await googleSignIn.initialize();
+      try {
+        await googleSignIn.initialize();
+      } catch (_) {}
 
       final googleUser = await googleSignIn.authenticate();
 
@@ -152,12 +153,25 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<void> logOut() async {
     try {
-      _firebaseAuth.signOut();
+      await _firebaseAuth.signOut();
       final googleSignIn = GoogleSignIn.instance;
-      await googleSignIn.initialize();
+
+      try {
+        await googleSignIn.initialize();
+      } catch (_) {}
+
       await googleSignIn.signOut();
     } on AuthException catch (e) {
       throw AuthException(message: "Erro ao tetar fazer logout do aplicativo!");
+    }
+  }
+
+  @override
+  Future<void> updateDisplayName(String name) async {
+    final user = _firebaseAuth.currentUser;
+    if (user != null) {
+      await user.updateDisplayName(name);
+      user.reload();
     }
   }
 }

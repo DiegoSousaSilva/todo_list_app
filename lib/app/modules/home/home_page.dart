@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list_app/app/core/auth/auth_provider.dart';
+import 'package:todo_list_app/app/modules/home/widgets/home_drawer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,6 +11,7 @@ class HomePage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(title: Text("Home Page")),
+      drawer: HomeDrawer(),
       body: Container(
         width: size.width,
         height: size.height,

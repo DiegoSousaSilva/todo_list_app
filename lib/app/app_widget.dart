@@ -34,10 +34,14 @@ class _AppWidgetState extends State<AppWidget> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Todo List App',
-      //initialRoute: '/login',
+      initialRoute: '/',
       theme: TodoListUiConfig.theme,
       navigatorKey: TodoListNavigator.navigatorKey,
-      routes: {...AuthModule().routers, ...HomeModule().routers},
+      routes: {
+        '/': (_) => SplashPage(),
+        ...AuthModule().routers,
+        ...HomeModule().routers,
+      },
       // routes: {
       //   '/login': (_) => MultiProvider(
       //     providers: [
@@ -48,7 +52,7 @@ class _AppWidgetState extends State<AppWidget> {
       //     child: LoginPage(),
       //   ),
       // },
-      home: SplashPage(),
+      //home: SplashPage(),
     );
   }
 }

@@ -33,8 +33,7 @@ class AppModule extends StatelessWidget {
             firebaseAuth: context.read<fAuth.FirebaseAuth>(),
             userService: context.read<UserService>(),
           )..loadListener(),
-          lazy:
-              false, // 🔥 O '..' tem que ficar aqui, no final da criação do AuthProvider!
+          lazy: false,
         ),
       ],
       child: AppWidget(),

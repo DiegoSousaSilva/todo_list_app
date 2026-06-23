@@ -6,313 +6,173 @@ Aplicativo de gerenciamento de tarefas desenvolvido em Flutter com foco em apren
 
 O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluindo:
 
-* Estruturação de projetos
-* Navegação entre telas
-* Gerenciamento de estado
-* Persistência local de dados
-* Organização em camadas
-* Versionamento com Git
+* Estruturação de projetos (Feature First)
+* Navegação customizada e global entre telas
+* Gerenciamento de estado reativo eficiente
+* Persistência local de dados com bancos relacionais
+* Organização em camadas isoladas (Clean Architecture de forma simplificada)
+* Versionamento profissional com Git
 
 
 ## Tecnologias
 
-* Flutter
-* Dart
+* Flutter & Dart
 * Firebase Authentication
   * Login com Email e Senha
-  * Recuperação de Senha
-  * Login com Google
-* SQLite (sqflite)
-* Provider
-* Google Fonts
+  * Cadastro de novos usuários
+  * Recuperação de Senha por email
+  * Integração com Login Social (Google)
+* SQLite (sqflite) para persistência local
+* Provider & Selector (Gerenciamento de Estado e Injeção de Dependências)
+* Google Fonts (Estilização de Tipografia)
 * Sign In Button
-* Validatorless
-* Flutter Overlay Loader
+* Validatorless (Validações de formulários simplificadas)
+* Flutter Overlay Loader (Feedbacks visuais de carregamento assíncrono)
 * Path
 
+## 📱 Demonstração
+
+<table>
+  <tr>
+    <td align="center">
+      <h4>Login</h4>
+      <img src="./screenshots/login-page.png" width="250" alt="Tela de Splash"/>
+    </td>
+    <td align="center">
+      <h4>Login 2</h4>
+      <img src="./screenshots/login-page-2.png" width="250" alt="Tela de Login"/>
+    </td>
+    <td align="center">
+      <h4>Cadastro</h4>
+      <img src="./screenshots/register.page.png" width="250" alt="Tela de Cadastro"/>
+    </td>
+  </tr>
+</table>
 
 ## Organização das Pastas
 
 ### core/
 
-Contém recursos compartilhados por toda a aplicação:
+Contém recursos globais compartilhados por toda a aplicação:
 
-* Configuração do banco de dados SQLite
-* Migrations
-* Temas e estilização
-* Widgets reutilizáveis
-* Configurações globais
-
+* Configuração do banco de dados SQLite e sistemas de Migrations
+* Temas estruturados, cores e extensões de contexto (`theme_extensions`)
+* Notifiers customizados de base (`DefaultChangeNotifier` e `DefaultListenerNotifier`)
+* Componentes de navegação global, validadores e widgets reutilizáveis
 
 ### modules/
 
-Organização baseada em funcionalidades (Feature First).
-
-Cada módulo concentra suas telas, controladores e responsabilidades relacionadas a uma funcionalidade específica da aplicação.
+Organização baseada em funcionalidades (**Feature First**). Cada módulo encapsula suas próprias rotas, controladores e views.
 
 #### Auth Module
-
-Responsável pelo fluxo completo de autenticação do usuário.
-
-Funcionalidades implementadas:
-
-* Cadastro com Email e Senha
-* Login com Email e Senha
-* Recuperação de Senha
-* Login com Google
-* Tratamento de erros de autenticação
-* Feedback visual de carregamento e mensagens
+Fluxo completo de entrada e segurança do usuário (Login, Cadastro e Recuperação de Credenciais).
 
 #### Splash Module
+Garante o carregamento inicial de serviços pesados e decide o rumo do usuário com base no estado da sessão.
 
-Tela inicial responsável pelo carregamento da aplicação e inicialização dos recursos necessários.
+#### Home Module
+Área principal após autenticação, contendo o painel geral de tarefas e o menu lateral integrado à conta do usuário.
 
 #### Todo List Module
-
-Módulo principal da aplicação.
-
-Será responsável por:
-
-* Cadastro de tarefas
-* Edição de tarefas
-* Exclusão de tarefas
-* Controle de tarefas concluídas
-* Filtros e produtividade
-
-
-### models/
-
-Contém as entidades e modelos de dados da aplicação.
+Módulo focado no núcleo da aplicação: manipulação e filtros de tarefas diárias.
 
 ### repositories/
-
-Responsável pelo acesso e persistência dos dados.
+Camada isolada de acesso a dados (Local com SQLite e Remoto com Firebase).
 
 ### services/
-
-Contém serviços utilizados pela aplicação, como autenticação, banco de dados e integrações externas.
-
+Camada intermediária contendo as regras de negócio da aplicação.
 
 
 ## Funcionalidades
 
 ### Concluído
 
-* [x] Estrutura modular da aplicação
-* [x] Configuração do SQLite
-* [x] Sistema de Migrations
-* [x] Gerenciamento do ciclo de vida do banco
-* [x] Configuração do Firebase
-* [x] Tela de Login
-* [x] Tela de Cadastro
-* [x] Cadastro de usuários com Firebase Authentication
-* [x] Login com Email e Senha
-* [x] Recuperação de Senha
-* [x] Login com Google
-* [x] Validação de formulários
-* [x] Tratamento de exceções de autenticação
-* [x] Sistema global de Loading
-* [x] Sistema global de Feedback de Erros
-* [x] Sistema global de Feedback de Sucesso
-* [x] Notifier Pattern para gerenciamento de estados
-* [x] Repository Pattern
-* [x] Service Layer
-* [x] Monitoramento global de autenticação
-* [x] Controle de sessão do usuário
-* [x] Redirecionamento automático após login
-* [x] Redirecionamento automático após logout
-* [x] Navegação global utilizando NavigatorKey
+* [x] Estrutura modular da aplicação (Feature First)
+* [x] Configuração e inicialização do SQLite
+* [x] Sistema robusto de Migrations para o banco local
+* [x] Gerenciamento do ciclo de vida de conexões do banco de dados
+* [x] Integração completa com Firebase SDK
+* [x] Interfaces responsivas de Login e Cadastro
+* [x] Fluxo de autenticação completo (Email/Senha, Google, Reset de Senha)
+* [x] Validação estruturada de formulários com Validatorless
+* [x] Tratamento centralizado de exceções nativas de autenticação
+* [x] Sistema global de Loading customizado via Overlays
+* [x] Sistema padronizado de feedbacks visuais (Mensagens de Erro e Sucesso)
+* [x] Notifier Pattern para controle reativo de estados de UI
+* [x] Repository e Service Patterns implementados em camadas isoladas
+* [x] Monitoramento global e persistente da sessão do usuário com Firebase
+* [x] Redirecionamento automatizado baseado no estado do `userChanges()`
+* [x] Navegação desacoplada da árvore de UI utilizando `NavigatorKey`
+* [x] **Menu Lateral Customizado (HomeDrawer) integrado ao perfil**
+* [x] **Renderização otimizada de dados de perfil (Nome e Foto) usando Selectors**
+* [x] **Atualização em tempo real do Display Name do usuário logado através do Firebase**
 
 ### Próximas Implementações
 
-* [ ] Cadastro de tarefas
-* [ ] Edição de tarefas
-* [ ] Exclusão de tarefas
-* [ ] Persistência local de tarefas
-* [ ] Filtro de tarefas
-* [ ] Tema escuro
-* [ ] Estatísticas de produtividade
+* [ ] Cadastro de novas tarefas locais vinculadas ao banco SQLite
+* [ ] Filtro inteligente de tarefas por período e status
+* [ ] Edição e exclusão física de registros
+* [ ] Customização de tema visual (Suporte a Dark Mode)
+* [ ] Dashboards de estatísticas de produtividade
 
 
-## Arquitetura Aplicada
+## Arquitetura e Padrões Aplicados
 
-O projeto segue uma arquitetura modular baseada em separação de responsabilidades.
+### Fluxo de Inicialização e Autenticação
 
-### Fluxo de Autenticação
+ [ SplashPage (Rota Raiz '/') ]
+                ↓
+[ AuthProvider (Iniciado via AppModule) ]
+↓
+[ Escuta ativa ao userChanges() ]
+↓
+(Usuário está Autenticado?)
+/
 
-SplashPage
-      ↓
-AuthProvider
-      ↓
-FirebaseAuth
-      ↓
-Usuário autenticado?
-      ↓
-HomePage / LoginPage
+Sim                        Não
+/
 
-### Navegação Global
+[ HomePage ]                 [ LoginPage ]
 
-A aplicação utiliza uma instância global de Navigator através do TodoListNavigator.
 
-Objetivos:
+### Otimização com Selectors
 
-* Permitir navegação fora da camada de UI
-* Facilitar redirecionamentos globais
-* Integrar o fluxo de autenticação com o Firebase
+Para evitar reconstruções desnecessárias na tela principal, a foto e o nome do usuário exibidos no `HomeDrawer` são envelopados individualmente em componentes `Selector`. Isso garante que o menu lateral só sofra re-render se o respectivo dado específico mudar no Firebase, mantendo a performance fluida.
 
-Exemplo de uso:
+```dart
+Selector<AuthProvider, String>(
+  selector: (context, authProvider) => authProvider.user?.displayName ?? "Não informado",
+  builder: (_, name, __) => Text(name),
+);
+Presentation, Service e Repository Layers
+A comunicação entre a interface do usuário e os dados segue um fluxo unidirecional rigoroso:
 
-* Redirecionamento automático após login
-* Redirecionamento automático após logout
-* Controle de rotas baseado na sessão do usuário
+A UI (Page) captura o evento do usuário e interage com seu respectivo Controller.
 
-### Presentation Layer
+O Controller delega a regra de negócio para a camada de Service (UserService).
 
-Responsável pela interface do usuário.
+O Service orquestra os dados utilizando a camada de Repository (UserRepository).
 
-Exemplos:
+O Repository altera o estado remoto (Firebase) ou local (SQLite).
 
-* LoginPage
-* RegisterPage
-* SplashPage
-* Controllers
+Como Executar
+Certifique-se de possuir o ambiente Flutter configurado na sua máquina.
 
-### Service Layer
+Clone o repositório
 
-Contém as regras de negócio da aplicação.
+Instale as dependências do projeto:
 
-Exemplos:
-
-* UserService
-* UserServiceImpl
-
-### Repository Layer
-
-Responsável pela comunicação com fontes de dados externas.
-
-Exemplos:
-
-* UserRepository
-* UserRepositoryImpl
-
-### Data Sources
-
-Atualmente a aplicação utiliza:
-
-* Firebase Authentication
-  * Cadastro de usuários
-  * Login
-  * Recuperação de senha
-  * Login com Google
-
-* SQLite
-  * Persistência local de dados
-
-### Modularização (Feature First)
-
-Cada funcionalidade da aplicação é organizada em módulos independentes.
-
-Módulos atuais:
-
-* Auth
-* Splash
-* Todo List
-  
-
-### State Management
-
-O projeto utiliza ChangeNotifier e Provider para gerenciamento de estados globais e locais.
-
-Estruturas implementadas:
-
-* DefaultChangeNotifier
-* DefaultListenerNotifier
-* AuthProvider
-
-Permitindo tratamento padronizado de:
-
-* Loading
-* Sucesso
-* Erros
-* Sessão do usuário
-* Feedback visual ao usuário
-
-### Gerenciamento de Sessão
-
-A aplicação utiliza um AuthProvider global responsável por monitorar as alterações de autenticação do Firebase.
-
-Recursos implementados:
-
-* Monitoramento do estado do usuário autenticado
-* Atualização automática da interface
-* Controle centralizado de logout
-* Redirecionamento automático entre Login e Home
-* Persistência de sessão do Firebase
-
-Eventos monitorados:
-
-* userChanges()
-* idTokenChanges()
-
-## Como Executar
-
-Instalar dependências:
-
-```bash
+Bash
 flutter pub get
-```
+Execute o projeto em modo de desenvolvimento:
 
-Executar o projeto:
-
-```bash
+Bash
 flutter run
-```
-
-## Status
-
-🚧 Em desenvolvimento
-
-### Funcionalidades já operacionais
-
-✅ Cadastro de usuários
-
-✅ Login com Email e Senha
-
-✅ Login com Google
-
-✅ Recuperação de Senha
-
-✅ Persistência de sessão do Firebase
-
-✅ Controle global de autenticação
-
-✅ Redirecionamento automático Login/Home
-
-✅ Firebase Authentication integrado
-
-✅ Arquitetura modular
-
-✅ Repository Pattern
-
-✅ Service Layer
-
-✅ Gerenciamento de estado com ChangeNotifier
-
-### Próximas etapas
-
-- Cadastro de tarefas
-- Persistência de tarefas
-- Filtros
-- Estatísticas de produtividade
-  
-
-## Estrutura Atual do Projeto
-
-```
+Estrutura Atual do Projeto
 ├─ assets
 │  └─ images
 │     └─ logo.png
-├─ ├─ lib
+├─ lib
 │  ├─ app
 │  │  ├─ app_module.dart
 │  │  ├─ app_widget.dart
@@ -358,7 +218,9 @@ flutter run
 │  │  │  │     └─ register_page.dart
 │  │  │  ├─ home
 │  │  │  │  ├─ home_module.dart
-│  │  │  │  └─ home_page.dart
+│  │  │  │  ├─ home_page.dart
+│  │  │  │  └─ widgets
+│  │  │  │     └─ home_drawer.dart
 │  │  │  └─ splash
 │  │  │     └─ splash_page.dart
 │  │  ├─ repositories
@@ -372,9 +234,8 @@ flutter run
 │  ├─ firebase_options.dart
 │  └─ main.dart
 
-``` 
+Status
+🚧 Em desenvolvimento
 
-## Autor
-
+Autor
 Diego Sousa
-
