@@ -44,7 +44,7 @@ O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluind
     </td>
     <td align="center">
       <h4>Cadastro</h4>
-      <img src="./screenshots/register.page.png" width="250" alt="Tela de Cadastro"/>
+      <img src="./screenshots/register-page.png" width="250" alt="Tela de Cadastro"/>
     </td>
   </tr>
 </table>
