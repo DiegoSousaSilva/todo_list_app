@@ -1,36 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:todo_list_app/app/core/auth/auth_provider.dart';
+import 'package:todo_list_app/app/core/ui/theme_extensions.dart';
 import 'package:todo_list_app/app/modules/home/widgets/home_drawer.dart';
+import 'package:todo_list_app/app/modules/home/widgets/home_filters.dart';
+import 'package:todo_list_app/app/modules/home/widgets/home_header.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(title: Text("Home Page")),
-      drawer: HomeDrawer(),
-      body: Container(
-        width: size.width,
-        height: size.height,
-        decoration: BoxDecoration(color: Colors.deepPurple.shade100),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text("Home Page"),
-              TextButton(
-                onPressed: () {
-                  context.read<AuthProvider>().logout();
-                },
-                child: Text('Sair'),
-              ),
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: context.primaryColor),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          PopupMenuButton(
+            icon: Icon(Icons.filter),
+            itemBuilder: (_) => [
+              PopupMenuItem<bool>(child: Text("Mostrar tarefas concluídas")),
             ],
           ),
-        ),
+        ],
+      ),
+      backgroundColor: Color(0xFFFAFBFE), // Color.fromARGB(255, 27, 34, 55),
+      drawer: HomeDrawer(),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: constraints.maxHeight,
+                minWidth: constraints.maxWidth,
+              ),
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                child: IntrinsicHeight(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [HomeHeader(), HomeFilters()],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

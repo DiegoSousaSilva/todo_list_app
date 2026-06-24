@@ -220,7 +220,10 @@ Estrutura Atual do Projeto
 │  │  │  │  ├─ home_module.dart
 │  │  │  │  ├─ home_page.dart
 │  │  │  │  └─ widgets
-│  │  │  │     └─ home_drawer.dart
+│  │  │  │     ├─ home_drawer.dart
+│  │  │  │     ├─ home_filters.dart
+│  │  │  │     ├─ home_header.dart
+│  │  │  │     └─ todo_card_filter.dart
 │  │  │  └─ splash
 │  │  │     └─ splash_page.dart
 │  │  ├─ repositories
@@ -239,3 +242,4 @@ Status
 
 Autor
 Diego Sousa
+```
