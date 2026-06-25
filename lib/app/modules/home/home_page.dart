@@ -3,6 +3,8 @@ import 'package:todo_list_app/app/core/ui/theme_extensions.dart';
 import 'package:todo_list_app/app/modules/home/widgets/home_drawer.dart';
 import 'package:todo_list_app/app/modules/home/widgets/home_filters.dart';
 import 'package:todo_list_app/app/modules/home/widgets/home_header.dart';
+import 'package:todo_list_app/app/modules/home/widgets/home_tasks.dart';
+import 'package:todo_list_app/app/modules/home/widgets/home_week_filter.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -12,7 +14,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: context.primaryColor),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color(0xFFFAFBFE),
         elevation: 0,
         actions: [
           PopupMenuButton(
@@ -25,6 +27,11 @@ class HomePage extends StatelessWidget {
       ),
       backgroundColor: Color(0xFFFAFBFE), // Color.fromARGB(255, 27, 34, 55),
       drawer: HomeDrawer(),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: context.primaryColor,
+        onPressed: () {},
+        child: Icon(Icons.add),
+      ),
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
@@ -38,7 +45,12 @@ class HomePage extends StatelessWidget {
                 child: IntrinsicHeight(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [HomeHeader(), HomeFilters()],
+                    children: [
+                      HomeHeader(),
+                      HomeFilters(),
+                      HomeWeekFilter(),
+                      HomeTasks(),
+                    ],
                   ),
                 ),
               ),

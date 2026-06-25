@@ -18,16 +18,14 @@ O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluind
 
 * Flutter & Dart
 * Firebase Authentication
-  * Login com Email e Senha
-  * Cadastro de novos usuários
-  * Recuperação de Senha por email
-  * Integração com Login Social (Google)
-* SQLite (sqflite) para persistência local
-* Provider & Selector (Gerenciamento de Estado e Injeção de Dependências)
-* Google Fonts (Estilização de Tipografia)
+* SQLite (sqflite)
+* Provider
+* Selector
+* Date Picker Timeline
+* Google Fonts
+* Validatorless
+* Flutter Overlay Loader
 * Sign In Button
-* Validatorless (Validações de formulários simplificadas)
-* Flutter Overlay Loader (Feedbacks visuais de carregamento assíncrono)
 * Path
 
 ## 📱 Demonstração
@@ -39,12 +37,12 @@ O projeto tem como objetivo praticar conceitos fundamentais do Flutter, incluind
       <img src="./screenshots/login-page.png" width="250" alt="Tela de Splash"/>
     </td>
     <td align="center">
-      <h4>Login 2</h4>
-      <img src="./screenshots/login-page-2.png" width="250" alt="Tela de Login"/>
-    </td>
-    <td align="center">
       <h4>Cadastro</h4>
       <img src="./screenshots/register-page.png" width="250" alt="Tela de Cadastro"/>
+    </td>
+    <td align="center">
+      <h4>Home Page</h4>
+      <img src="./screenshots/home-page.png" width="250" alt="Tela de Login"/>
     </td>
   </tr>
 </table>
@@ -71,8 +69,17 @@ Fluxo completo de entrada e segurança do usuário (Login, Cadastro e Recuperaç
 Garante o carregamento inicial de serviços pesados e decide o rumo do usuário com base no estado da sessão.
 
 #### Home Module
-Área principal após autenticação, contendo o painel geral de tarefas e o menu lateral integrado à conta do usuário.
 
+Responsável pela área principal da aplicação.
+
+Atualmente contém:
+
+- HomeHeader
+- HomeDrawer
+- HomeFilters
+- TodoCardFilter
+
+Toda a interface da Home é construída de forma componentizada para facilitar manutenção e reutilização.
 #### Todo List Module
 Módulo focado no núcleo da aplicação: manipulação e filtros de tarefas diárias.
 
@@ -103,17 +110,28 @@ Camada intermediária contendo as regras de negócio da aplicação.
 * [x] Monitoramento global e persistente da sessão do usuário com Firebase
 * [x] Redirecionamento automatizado baseado no estado do `userChanges()`
 * [x] Navegação desacoplada da árvore de UI utilizando `NavigatorKey`
-* [x] **Menu Lateral Customizado (HomeDrawer) integrado ao perfil**
-* [x] **Renderização otimizada de dados de perfil (Nome e Foto) usando Selectors**
-* [x] **Atualização em tempo real do Display Name do usuário logado através do Firebase**
+* [x] Renderização otimizada de dados de perfil (Nome e Foto) usando Selectors
+* [x] Atualização em tempo real do Display Name do usuário logado através do Firebase
+* [x] Estrutura inicial da Home Page
+- [x] Cabeçalho personalizado da Home
+- [x] Menu lateral (Drawer)
+- [x] Cards de filtros de tarefas
+- [x] Navegação horizontal entre filtros
+- [x] Integração do Date Picker Timeline
+- [x] Componentização da interface da Home
 
-### Próximas Implementações
+## Roadmap
 
-* [ ] Cadastro de novas tarefas locais vinculadas ao banco SQLite
-* [ ] Filtro inteligente de tarefas por período e status
-* [ ] Edição e exclusão física de registros
-* [ ] Customização de tema visual (Suporte a Dark Mode)
-* [ ] Dashboards de estatísticas de produtividade
+### Em desenvolvimento
+
+- [ ] CRUD completo de tarefas
+- [ ] Persistência das tarefas no SQLite
+- [ ] Filtro por período
+- [ ] Pesquisa de tarefas
+- [ ] Estatísticas
+- [ ] Dark Mode
+- [ ] Notificações locais
+- [ ] Sincronização em nuvem
 
 
 ## Arquitetura e Padrões Aplicados
@@ -223,6 +241,9 @@ Estrutura Atual do Projeto
 │  │  │  │     ├─ home_drawer.dart
 │  │  │  │     ├─ home_filters.dart
 │  │  │  │     ├─ home_header.dart
+│  │  │  │     ├─ home_tasks.dart
+│  │  │  │     ├─ home_week_filter.dart
+│  │  │  │     ├─ task.dart
 │  │  │  │     └─ todo_card_filter.dart
 │  │  │  └─ splash
 │  │  │     └─ splash_page.dart
